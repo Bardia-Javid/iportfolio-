@@ -25,17 +25,23 @@ function headerToggle() {
   if (isShown) {
     icon.classList.remove('bi-list');
     icon.classList.add('bi-x');
+    
+    // Store current scroll position
+    scrollPosition = window.pageYOffset;
+    
+    // Add scroll lock while preserving position
+    const main = document.querySelector('main');
+    main.classList.add('scroll-lock');
+    main.style.top = `-${scrollPosition}px`;
   } else {
     icon.classList.remove('bi-x');
     icon.classList.add('bi-list');
-  }
-
-  // Toggle scroll lock
-  const main = document.querySelector('main');
-  if (isShown) {
-    main.classList.add('scroll-lock');
-  } else {
+    
+    // Restore scroll position
+    const main = document.querySelector('main');
     main.classList.remove('scroll-lock');
+    main.style.top = '';
+    window.scrollTo(0, scrollPosition);
   }
 }
 
