@@ -37,11 +37,14 @@ function headerToggle() {
     icon.classList.remove('bi-x');
     icon.classList.add('bi-list');
     
-    // Restore scroll position
+    // Restore scroll position without animation
     const main = document.querySelector('main');
     main.classList.remove('scroll-lock');
     main.style.top = '';
-    window.scrollTo(0, scrollPosition);
+    window.scrollTo({
+      top: scrollPosition,
+      behavior: 'instant' // Use instant instead of smooth to prevent animation
+    });
   }
 }
 

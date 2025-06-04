@@ -1331,7 +1331,6 @@ main.scroll-lock {
   height: 100vh;
   width: 100%;
   z-index: 9998; /* ensures it's below header-toggle */
-  transition: top 0.3s ease;
 }
 
 /*--------------------------------------------------------------
