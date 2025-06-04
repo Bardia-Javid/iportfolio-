@@ -1337,6 +1337,31 @@ body.menu-lock {
   right: 15px !important;
   z-index: 999999 !important;
 }
+@media (max-width: 991px) {
+  #header {
+    position: fixed !important;
+    top: 0 !important;
+    transform: none !important;
+    transition: none !important;
+    z-index: 10000 !important;
+  }
+
+  #header.header-scrolled {
+    transform: none !important;
+  }
+
+  .header-toggle {
+    display: flex !important;
+    position: fixed !important;
+    top: 15px !important;
+    right: 15px !important;
+    z-index: 999999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+}
 
 
 
