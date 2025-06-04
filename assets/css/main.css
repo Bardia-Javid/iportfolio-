@@ -1353,4 +1353,64 @@ main.scroll-lock {
   #header.header-show + .header-toggle i {
     transform: rotate(90deg) !important;
   }
+
+  .header-toggle {
+    display: flex !important;
+    position: fixed !important;
+    top: 15px !important;
+    right: 15px !important;
+    z-index: 999999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: transform 0.3s ease !important;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    background-color: var(--accent-color) !important;
+    color: var(--contrast-color) !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    cursor: pointer !important;
+  }
+}
+
+/* Hide header toggle on desktop */
+@media (min-width: 992px) {
+  .header-toggle {
+    display: none !important;
+  }
+  
+  #header {
+    left: 0 !important;
+  }
+  
+  main.scroll-lock {
+    position: static !important;
+    overflow: auto !important;
+  }
+}
+
+/* Fix mobile hero image to only show on mobile */
+@media (max-width: 768px) {
+  .hero picture source {
+    display: block;
+  }
+  
+  .hero picture img {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .hero picture source {
+    display: none;
+  }
+  
+  .hero picture img {
+    display: block;
+  }
 }
