@@ -19,19 +19,19 @@
 function headerToggle() {
   const header = document.querySelector('#header');
   const isShown = header.classList.toggle('header-show');
-  headerToggleBtn.classList.toggle('bi-list');
-  headerToggleBtn.classList.toggle('bi-x');
+  const icon = headerToggleBtn.querySelector('i');
+  icon.classList.toggle('bi-list');
+  icon.classList.toggle('bi-x');
+  
 
-  if (isShown) {
-    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    document.body.style.top = `-${scrollPosition}px`;
-    document.body.classList.add('scroll-lock');
-  } else {
-    document.body.classList.remove('scroll-lock');
-    document.body.style.top = '';
-    window.scrollTo({ top: scrollPosition, behavior: 'instant' });
+  const main = document.querySelector('main');
 
-  }
+if (isShown) {
+  main.classList.add('scroll-lock');
+} else {
+  main.classList.remove('scroll-lock');
+}
+
 }
 
 

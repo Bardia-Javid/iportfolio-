@@ -1312,31 +1312,40 @@ section,
     background-position: center;
   }
 }
-/* Prevent background scroll when mobile menu is open */
-body.menu-lock {
+
+/*--------------------------------------------------------------
+# Scroll Lock on Mobile Menu
+--------------------------------------------------------------*/
+main.scroll-lock {
   overflow: hidden;
+  position: fixed;
   height: 100vh;
-  position: fixed;
-  width: 100%;
-}
-/* Prevent background scroll when mobile menu is open */
-.scroll-lock {
-  overflow: hidden;
-  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
+  z-index: 9998; /* ensures it's below header-toggle */
 }
+
+/*--------------------------------------------------------------
+# Header Toggle (Hamburger Button)
+--------------------------------------------------------------*/
 .header-toggle {
   display: flex !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
   position: fixed !important;
   top: 15px !important;
   right: 15px !important;
   z-index: 999999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: none !important;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0); /* iOS Safari fix */
 }
+
+/*--------------------------------------------------------------
+# Header Style on Mobile
+--------------------------------------------------------------*/
 @media (max-width: 991px) {
   #header {
     position: fixed !important;
@@ -1349,20 +1358,4 @@ body.menu-lock {
   #header.header-scrolled {
     transform: none !important;
   }
-
-  .header-toggle {
-    display: flex !important;
-    position: fixed !important;
-    top: 15px !important;
-    right: 15px !important;
-    z-index: 999999 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transition: none !important;
-  }
 }
-
-
-
-
