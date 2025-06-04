@@ -1305,3 +1305,28 @@ section,
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+@media (max-width: 768px) {
+  #hero {
+    background-image: url('../heroimage-mobile.png') !important;
+    background-size: cover;
+    background-position: center;
+  }
+}
+/* Prevent background scroll when mobile menu is open */
+body.menu-lock {
+  overflow: hidden;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+}
+/* Prevent background scroll when mobile menu is open */
+.scroll-lock {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+
+
