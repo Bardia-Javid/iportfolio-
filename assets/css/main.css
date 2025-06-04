@@ -1327,6 +1327,16 @@ body.menu-lock {
   top: 0;
   left: 0;
 }
+.header .header-toggle {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  top: 15px !important;
+  right: 15px !important;
+  z-index: 99999 !important;
+}
+
 
 
 
