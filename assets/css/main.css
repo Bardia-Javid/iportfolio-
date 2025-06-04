@@ -224,26 +224,35 @@ h6 {
 }
 
 .header .header-toggle {
-  color: var(--contrast-color);
-  background-color: var(--accent-color);
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 99999;
-  transition: background-color 0.3s;
+  display: flex !important;
+  position: fixed !important;
+  top: 15px !important;
+  right: 15px !important;
+  z-index: 999999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: transform 0.3s ease !important;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0); /* iOS Safari fix */
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  cursor: pointer !important;
 }
 
-.header .header-toggle:hover {
-  color: var(--contrast-color);
-  background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%);
+.header-toggle i {
+  font-size: 22px !important;
+  transition: transform 0.3s ease !important;
+}
+
+.header-toggle:hover {
+  background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%) !important;
 }
 
 /*--------------------------------------------------------------
@@ -1327,35 +1336,23 @@ main.scroll-lock {
 }
 
 /*--------------------------------------------------------------
-# Header Toggle (Hamburger Button)
---------------------------------------------------------------*/
-.header-toggle {
-  display: flex !important;
-  position: fixed !important;
-  top: 15px !important;
-  right: 15px !important;
-  z-index: 999999 !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-  transition: none !important;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0); /* iOS Safari fix */
-}
-
-/*--------------------------------------------------------------
 # Header Style on Mobile
 --------------------------------------------------------------*/
 @media (max-width: 991px) {
   #header {
     position: fixed !important;
     top: 0 !important;
+    left: -100% !important;
     transform: none !important;
-    transition: none !important;
+    transition: left 0.3s ease !important;
     z-index: 10000 !important;
   }
 
-  #header.header-scrolled {
-    transform: none !important;
+  #header.header-show {
+    left: 0 !important;
+  }
+
+  #header.header-show + .header-toggle i {
+    transform: rotate(90deg) !important;
   }
 }

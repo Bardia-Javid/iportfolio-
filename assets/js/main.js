@@ -20,27 +20,48 @@ function headerToggle() {
   const header = document.querySelector('#header');
   const isShown = header.classList.toggle('header-show');
   const icon = headerToggleBtn.querySelector('i');
-  icon.classList.toggle('bi-list');
-  icon.classList.toggle('bi-x');
   
+  // Toggle icon classes
+  if (isShown) {
+    icon.classList.remove('bi-list');
+    icon.classList.add('bi-x');
+  } else {
+    icon.classList.remove('bi-x');
+    icon.classList.add('bi-list');
+  }
 
+  // Toggle scroll lock
   const main = document.querySelector('main');
-
-if (isShown) {
-  main.classList.add('scroll-lock');
-} else {
-  main.classList.remove('scroll-lock');
+  if (isShown) {
+    main.classList.add('scroll-lock');
+  } else {
+    main.classList.remove('scroll-lock');
+  }
 }
 
-}
-
-
+// Add click event listener
 headerToggleBtn.addEventListener('click', (event) => {
-  event.preventDefault();   // Prevents default button behavior
-  event.stopPropagation();  // Stops event from affecting other elements
+  event.preventDefault();
+  event.stopPropagation();
   headerToggle();
 });
 
+// Close menu when clicking outside
+document.addEventListener('click', (event) => {
+  const header = document.querySelector('#header');
+  const headerToggleBtn = document.querySelector('.header-toggle');
+  
+  if (header.classList.contains('header-show') && 
+      !header.contains(event.target) && 
+      !headerToggleBtn.contains(event.target)) {
+    headerToggle();
+  }
+});
+
+// Prevent menu from closing when clicking inside
+document.querySelector('#header').addEventListener('click', (event) => {
+  event.stopPropagation();
+});
 
     /**
      * Hide mobile nav on same-page/hash links
