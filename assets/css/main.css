@@ -226,24 +226,25 @@ h6 {
 /*--------------------------------------------------------------
 # Header Toggle Button
 --------------------------------------------------------------*/
+/* Base styles - hidden by default */
 .header-toggle {
-  display: none; /* Hide by default */
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Mobile styles */
 @media (max-width: 991px) {
   .header-toggle {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
     position: fixed !important;
     top: 15px !important;
     right: 15px !important;
     z-index: 999999 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transition: transform 0.3s ease !important;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
     background-color: var(--accent-color) !important;
     color: var(--contrast-color) !important;
     width: 40px !important;
@@ -253,6 +254,10 @@ h6 {
     justify-content: center !important;
     border: none !important;
     cursor: pointer !important;
+  }
+
+  .header-toggle i {
+    font-size: 22px !important;
   }
 
   #header {
@@ -269,13 +274,22 @@ h6 {
   }
 }
 
-/* Desktop styles */
+/* Desktop styles - ensure button is completely hidden */
 @media (min-width: 992px) {
-  .header-toggle {
+  .header-toggle,
+  .header-toggle * {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
   }
 
   #header {
