@@ -226,21 +226,15 @@ h6 {
 /*--------------------------------------------------------------
 # Header Toggle Button
 --------------------------------------------------------------*/
-/* Base styles - hidden by default */
+/* Base styles */
 .header-toggle {
   display: none;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* Mobile styles */
 @media (max-width: 991px) {
   .header-toggle {
     display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
     position: fixed !important;
     top: 15px !important;
     right: 15px !important;
@@ -274,22 +268,10 @@ h6 {
   }
 }
 
-/* Desktop styles - ensure button is completely hidden */
+/* Desktop styles */
 @media (min-width: 992px) {
-  .header-toggle,
-  .header-toggle * {
+  .header-toggle {
     display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    position: absolute !important;
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    clip: rect(0 0 0 0) !important;
-    overflow: hidden !important;
   }
 
   #header {

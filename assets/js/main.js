@@ -16,61 +16,81 @@
 
     let scrollPosition;
 
-function headerToggle() {
-  const header = document.querySelector('#header');
-  const isShown = header.classList.toggle('header-show');
-  const icon = headerToggleBtn.querySelector('i');
-  
-  // Toggle icon classes
-  if (isShown) {
-    icon.classList.remove('bi-list');
-    icon.classList.add('bi-x');
-    
-    // Store current scroll position
-    scrollPosition = window.pageYOffset;
-    
-    // Add scroll lock while preserving position
-    const main = document.querySelector('main');
-    main.classList.add('scroll-lock');
-    main.style.top = `-${scrollPosition}px`;
-  } else {
-    icon.classList.remove('bi-x');
-    icon.classList.add('bi-list');
-    
-    // Restore scroll position without animation
-    const main = document.querySelector('main');
-    main.classList.remove('scroll-lock');
-    main.style.top = '';
-    window.scrollTo({
-      top: scrollPosition,
-      behavior: 'instant' // Use instant instead of smooth to prevent animation
+    // Only initialize mobile menu functionality on mobile devices
+    function initMobileMenu() {
+      if (window.innerWidth < 992) { // Match Bootstrap's lg breakpoint
+        if (headerToggleBtn) {
+          // Remove any existing listeners
+          headerToggleBtn.removeEventListener('click', handleHeaderToggle);
+          // Add new listener
+          headerToggleBtn.addEventListener('click', handleHeaderToggle);
+        }
+      } else {
+        // Remove listeners on desktop
+        if (headerToggleBtn) {
+          headerToggleBtn.removeEventListener('click', handleHeaderToggle);
+        }
+      }
+    }
+
+    function handleHeaderToggle(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      headerToggle();
+    }
+
+    function headerToggle() {
+      const header = document.querySelector('#header');
+      const isShown = header.classList.toggle('header-show');
+      const icon = headerToggleBtn.querySelector('i');
+      
+      // Toggle icon classes
+      if (isShown) {
+        icon.classList.remove('bi-list');
+        icon.classList.add('bi-x');
+        
+        // Store current scroll position
+        scrollPosition = window.pageYOffset;
+        
+        // Add scroll lock while preserving position
+        const main = document.querySelector('main');
+        main.classList.add('scroll-lock');
+        main.style.top = `-${scrollPosition}px`;
+      } else {
+        icon.classList.remove('bi-x');
+        icon.classList.add('bi-list');
+        
+        // Restore scroll position without animation
+        const main = document.querySelector('main');
+        main.classList.remove('scroll-lock');
+        main.style.top = '';
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'instant'
+        });
+      }
+    }
+
+    // Initialize on load and resize
+    window.addEventListener('load', initMobileMenu);
+    window.addEventListener('resize', initMobileMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      const header = document.querySelector('#header');
+      const headerToggleBtn = document.querySelector('.header-toggle');
+      
+      if (header.classList.contains('header-show') && 
+          !header.contains(event.target) && 
+          !headerToggleBtn.contains(event.target)) {
+        headerToggle();
+      }
     });
-  }
-}
 
-// Add click event listener
-headerToggleBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  event.stopPropagation();
-  headerToggle();
-});
-
-// Close menu when clicking outside
-document.addEventListener('click', (event) => {
-  const header = document.querySelector('#header');
-  const headerToggleBtn = document.querySelector('.header-toggle');
-  
-  if (header.classList.contains('header-show') && 
-      !header.contains(event.target) && 
-      !headerToggleBtn.contains(event.target)) {
-    headerToggle();
-  }
-});
-
-// Prevent menu from closing when clicking inside
-document.querySelector('#header').addEventListener('click', (event) => {
-  event.stopPropagation();
-});
+    // Prevent menu from closing when clicking inside
+    document.querySelector('#header').addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
 
     /**
      * Hide mobile nav on same-page/hash links
@@ -118,16 +138,15 @@ document.querySelector('#header').addEventListener('click', (event) => {
     }
     const scrollTopBtn = document.getElementById('scroll-top');
 
-scrollTopBtn.addEventListener('click', (e) => {
-  // Make sure it's a direct user click (not triggered by browser/script)
-  if (e.isTrusted) {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+    scrollTopBtn.addEventListener('click', (e) => {
+      // Make sure it's a direct user click (not triggered by browser/script)
+      if (e.isTrusted) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
     });
-  }
-});
-
 
     window.addEventListener('load', toggleScrollTop);
     document.addEventListener('scroll', toggleScrollTop);
